@@ -25,39 +25,39 @@ u_int32_t getTracerPid(int32_t iPID)
 {
     char strPath[MAXLENGTH];
     char strBuff[MAXLENGTH];
-	char *strTarget = "TracerPid";
-	char *strParse = ":";
-	char *strPoint = NULL;
-	char *strTracerPid = NULL;
-	char *strSavePtr = NULL;
-	FILE *fp = NULL;
-	u_int32_t uTracerPid = -1;
+    char *strTarget = "TracerPid";
+    char *strParse = ":";
+    char *strPoint = NULL;
+    char *strTracerPid = NULL;
+    char *strSavePtr = NULL;
+    FILE *fp = NULL;
+    u_int32_t uTracerPid = -1;
 	
-	//Wrong Argument, return Error
-	if (iPID < 0)
-	  goto RETURN;
+    //Wrong Argument, return Error
+    if (iPID < 0)
+      goto RETURN;
 
-	//Generate the path string
+    //Generate the path string
     sprintf(strPath, "/proc/%d/status", iPID);
 
-	if (!(fp = fopen(strPath, "r")))
-	  goto RETURN;
+    if (!(fp = fopen(strPath, "r")))
+      goto RETURN;
 
-	while(fgets(strBuff, MAXLENGTH - 10, fp)) {
-	  if ((strPoint = strstr(strBuff, strTarget)) != NULL)
-		break;
-	}
+    while(fgets(strBuff, MAXLENGTH - 10, fp)) {
+      if ((strPoint = strstr(strBuff, strTarget)) != NULL)
+    	break;
+    }
 
-	//error if not found TracerPid String
-	if (!strPoint)
-	  goto RETURN;
-	//error if Parse failed
-	if (!(strTracerPid = strtok_r(strPoint, strParse, &strSavePtr)))
-	  goto RETURN;
-	if (!(strTracerPid = strtok_r(NULL, strParse, &strSavePtr)))
-	  goto RETURN;
-	uTracerPid = atoi(strTracerPid);
-	
+    //error if not found TracerPid String
+    if (!strPoint)
+      goto RETURN;
+    //error if Parse failed
+    if (!(strTracerPid = strtok_r(strPoint, strParse, &strSavePtr)))
+      goto RETURN;
+    if (!(strTracerPid = strtok_r(NULL, strParse, &strSavePtr)))
+      goto RETURN;
+    uTracerPid = atoi(strTracerPid);
+    
  RETURN:
-	return uTracerPid; 
+    return uTracerPid; 
 }
