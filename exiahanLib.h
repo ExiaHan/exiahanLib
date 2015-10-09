@@ -26,6 +26,6 @@
 #define MAXLENGTH 1000
 #define TRUE 1
 
-extern u_int32_t getTracerPid(int32_t iPID);
+extern int32_t getTracerPid(int32_t iPID);
 
 #endif

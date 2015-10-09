@@ -21,7 +21,7 @@
 
 #include "exiahanLib.h"
 
-u_int32_t getTracerPid(int32_t iPID)
+int32_t getTracerPid(int32_t iPID)
 {
     char strPath[MAXLENGTH];
     char strBuff[MAXLENGTH];
@@ -31,7 +31,7 @@ u_int32_t getTracerPid(int32_t iPID)
     char *strTracerPid = NULL;
     char *strSavePtr = NULL;
     FILE *fp = NULL;
-    u_int32_t uTracerPid = -1;
+    int32_t uTracerPid = -1;
 	
     //Wrong Argument, return Error
     if (iPID < 0)
