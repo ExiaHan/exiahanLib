@@ -59,5 +59,7 @@ int32_t getTracerPid(int32_t iPID)
     uTracerPid = atoi(strTracerPid);
     
  RETURN:
+    if (!fp)
+        fclose(fp);
     return uTracerPid; 
 }
